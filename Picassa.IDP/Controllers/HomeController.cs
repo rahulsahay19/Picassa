@@ -8,8 +8,8 @@ namespace Picassa.IDP.Controllers
     [Route("[Controller]")]
     public class HomeController : ControllerBase
     {
-        //[Authorize]
-        public IActionResult Get()
+        [Authorize]
+        public ActionResult Get()
         {
             return Ok("tests!");
         }

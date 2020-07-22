@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Picassa.IDP.Data.Models;
+using Picassa.IDP.Models;
 
 namespace Picassa.IDP.Data
 {

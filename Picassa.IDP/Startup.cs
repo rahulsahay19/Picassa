@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Picassa.IDP.Data.Models;
+using Picassa.IDP.Infrastructure;
+using Picassa.IDP.Models;
 
 namespace Picassa.IDP
 {
@@ -25,7 +27,15 @@ namespace Picassa.IDP
             services.AddDbContext<PicassaDbContext>(options =>
                 options.UseSqlServer(
                     this.Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(
+                    options =>
+                    {
+                        options.Password.RequireDigit = false;
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireUppercase = false;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequiredLength = 7;
+                    })
                 .AddEntityFrameworkStores<PicassaDbContext>();
             var applicationSettingsConfig = this.Configuration.GetSection("ApplicationSettings");
             services.Configure<ApplicationSettings>(applicationSettingsConfig);
@@ -49,7 +59,7 @@ namespace Picassa.IDP
                     };
                 });
             services.AddControllers();
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,19 +69,19 @@ namespace Picassa.IDP
             {
                 app.UseDatabaseErrorPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-          
+
             app.UseRouting();
+            app.UseCors(options =>
+                options.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+            );
 
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.ApplyMigrations();
         }
     }
 }
