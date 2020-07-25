@@ -7,8 +7,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = environment.apiUrl + 'login';
-  private registerUrl = environment.apiUrl + 'register';
+  private loginUrl = environment.apiUrl + '/identity/login';
+  private registerUrl = environment.apiUrl + '/identity/register';
   constructor(private http: HttpClient) { }
 
   login(data): Observable<any> {
@@ -17,5 +17,13 @@ export class AuthService {
 
   register(data): Observable<any> {
     return this.http.post(this.registerUrl, data);
+  }
+
+  saveToken(token) {
+    localStorage.setItem('token', token);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 }

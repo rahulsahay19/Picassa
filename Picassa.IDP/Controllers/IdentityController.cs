@@ -44,7 +44,7 @@ namespace Picassa.IDP.Controllers
         }
 
         [Route(nameof(Login))]
-        public async Task<ActionResult<string>> Login(LoginRequestModel model)
+        public async Task<ActionResult<object>> Login(LoginRequestModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null)
@@ -68,7 +68,10 @@ namespace Picassa.IDP.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var encryptedSecurityToken = tokenHandler.WriteToken(token);
 
-            return encryptedSecurityToken;
+            return new
+            {
+                Token = encryptedSecurityToken
+            };
         }
     }
 }
