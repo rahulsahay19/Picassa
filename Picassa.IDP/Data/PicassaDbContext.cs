@@ -11,5 +11,18 @@ namespace Picassa.IDP.Data
             : base(options)
         {
         }
+
+        public DbSet<Picture> Pictures { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Picture>()
+                .HasOne(u => u.User)
+                .WithMany(c => c.Pictures)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(builder);
+        }
     }
 }

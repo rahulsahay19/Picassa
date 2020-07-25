@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Picassa.IDP.Data;
 
 namespace Picassa.IDP.Data.Migrations
 {
     [DbContext(typeof(PicassaDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200725145425_PictureTable")]
+    partial class PictureTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,7 +176,7 @@ namespace Picassa.IDP.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Pictures");
+                    b.ToTable("Picture");
                 });
 
             modelBuilder.Entity("Picassa.IDP.Data.Models.User", b =>
