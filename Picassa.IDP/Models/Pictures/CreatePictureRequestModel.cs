@@ -5,7 +5,6 @@ namespace Picassa.IDP.Models.Pictures
 {
     public class CreatePictureRequestModel
     {
-        [Required]
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
         [Required]
