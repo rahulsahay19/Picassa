@@ -49,14 +49,26 @@ namespace Picassa.IDP.Features.Pictures
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-      
+
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<PictureDetailServiceModel>> FetchPictureDetails(int id)
             => await _pictureService.GetPictureDetailsById(id);
-            //return picture.OrNotFound();
-        
+        //return picture.OrNotFound();
+        [HttpPut]
+        public async Task<ActionResult> Update(UpdatePictureRequestModel model)
+        {
+            var userId = User.GetId();
+            var updated = await _pictureService.Update(model.Id, model.Description, userId);
+            if (!updated)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
     }
 }

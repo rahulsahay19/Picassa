@@ -8,5 +8,6 @@ namespace Picassa.IDP.Features.Pictures
         Task<int> Create(string imageUrl, string description, string userId);
         Task<IEnumerable<PictureListServiceModel>> GetPicturesByUserId(string userId);
         Task<PictureDetailServiceModel> GetPictureDetailsById(int id);
+        Task<bool> Update(int id, string description, string userId);
     }
 }

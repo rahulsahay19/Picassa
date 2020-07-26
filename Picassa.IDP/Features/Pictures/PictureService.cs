@@ -50,5 +50,24 @@
                     UserId = p.UserId,
                     UserName = p.User.UserName
                 }).FirstOrDefaultAsync();
+
+        public async Task<bool> Update(int id, string description, string userId)
+        {
+            var picture = await GetByIdAndByUserId(id, userId);
+            if (picture == null)
+            {
+                return false;
+            }
+
+            picture.Description = description;
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        private async Task<Picture> GetByIdAndByUserId(int id, string userId)
+            => await _dbContext
+                .Pictures
+                .Where(p => p.Id == id && p.UserId == userId)
+                .FirstOrDefaultAsync();
     }
 }
