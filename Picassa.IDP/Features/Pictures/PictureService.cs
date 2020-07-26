@@ -1,4 +1,8 @@
-﻿namespace Picassa.IDP.Features.Pictures
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
+namespace Picassa.IDP.Features.Pictures
 {
     using System.Threading.Tasks;
     using Data;
@@ -23,5 +27,16 @@
             await _dbContext.SaveChangesAsync();
             return picture.Id;
         }
+
+        public async Task<IEnumerable<PictureListResponseModel>> GetPicturesByUserId(string userId)
+            => await _dbContext
+                .Pictures
+                .Where(p => p.UserId == userId)
+                .Select(p => new PictureListResponseModel
+                {
+                    Id = p.Id,
+                    ImageUrl = p.ImageUrl
+                }).ToListAsync();
+
     }
 }
