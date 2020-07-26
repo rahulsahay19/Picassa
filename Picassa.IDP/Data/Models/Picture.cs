@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static Picassa.IDP.Data.DataValidationConstants.Picture;
-
-namespace Picassa.IDP.Data.Models
+﻿namespace Picassa.IDP.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using static Picassa.IDP.Data.DataValidationConstants.Picture;
+
     public class Picture
     {
         public int Id { get; set; }

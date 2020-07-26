@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Identity;
-
-namespace Picassa.IDP.Data.Models
+﻿namespace Picassa.IDP.Data.Models
 {
+    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Identity;
     public class User : IdentityUser
     {
         public IEnumerable<Picture> Pictures { get; } = new HashSet<Picture>();

@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Picassa.IDP.Data.Models;
-using Picassa.IDP.Models;
-
-namespace Picassa.IDP.Data
+﻿namespace Picassa.IDP.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using Models;
+
     public class PicassaDbContext : IdentityDbContext<User>
     {
         public PicassaDbContext(DbContextOptions<PicassaDbContext> options)

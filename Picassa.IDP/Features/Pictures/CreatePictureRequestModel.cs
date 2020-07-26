@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static Picassa.IDP.Data.DataValidationConstants.Picture;
-
-namespace Picassa.IDP.Models.Pictures
+namespace Picassa.IDP.Features.Pictures
 {
+    using static Data.DataValidationConstants.Picture;
     public class CreatePictureRequestModel
     {
         [MaxLength(MaxDescriptionLength)]

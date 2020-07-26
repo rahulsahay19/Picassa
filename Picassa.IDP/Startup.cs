@@ -1,14 +1,11 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Picassa.IDP.Data;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Picassa.IDP.Infrastructure;
-
 namespace Picassa.IDP
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Infrastructure;
     public class Startup
     {
         private readonly IConfiguration _configuration;
@@ -16,14 +13,14 @@ namespace Picassa.IDP
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        => services.AddDbContext<PicassaDbContext>(options =>
-                    options.UseSqlServer(
-                        _configuration.GetConnectionString()))
+            => services
+                .AddDatabase(_configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetApplicationSettings(_configuration))
+                .AddApplicationServices()
+                .AddSwagger()
                 .AddControllers();
-
-
+                
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -33,7 +30,8 @@ namespace Picassa.IDP
                 app.UseDatabaseErrorPage();
             }
 
-            app.UseRouting()
+            app.UseSwaggerUI()
+                .UseRouting()
                 .UseCors(options => options
                     .AllowAnyOrigin()
                     .AllowAnyHeader()

@@ -1,16 +1,30 @@
-﻿using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using Picassa.IDP.Data;
-using Picassa.IDP.Data.Models;
+﻿using Microsoft.OpenApi.Models;
 
 namespace Picassa.IDP.Infrastructure
 {
+    using System.Text;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.IdentityModel.Tokens;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Data;
+    using Data.Models;
+    using Features.Identity;
+    using Features.Pictures;
     public static class ServiceCollectionExtension
     {
+        public static ApplicationSettings GetApplicationSettings(this IServiceCollection services, IConfiguration configuration)
+        {
+            var applicationSettingsConfig = configuration.GetSection("ApplicationSettings");
+            services.Configure<ApplicationSettings>(applicationSettingsConfig);
+            return applicationSettingsConfig.Get<ApplicationSettings>();
+        }
+
+        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
+            => services.AddDbContext<PicassaDbContext>(options => options.UseSqlServer(
+                configuration.GetConnectionString()));
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services.AddIdentity<User, IdentityRole>(
@@ -48,5 +62,17 @@ namespace Picassa.IDP.Infrastructure
                 });
             return services;
         }
+
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+         => services
+                .AddTransient<IIdentityService, IdentityService>()
+                .AddTransient<IPictureService, PictureService>();
+
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
+            => services
+                .AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo {Title = "Picassa API", Version = "v1"});
+                });
     }
 }

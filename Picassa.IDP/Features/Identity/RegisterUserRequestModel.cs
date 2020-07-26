@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Picassa.IDP.Models.Identity
+﻿namespace Picassa.IDP.Features.Identity
 {
+    using System.ComponentModel.DataAnnotations;
+    
     public class RegisterUserRequestModel
     {
         [Required]
@@ -9,6 +9,6 @@ namespace Picassa.IDP.Models.Identity
         [Required]
         public string Password { get; set; }
         [Required]
-        public string Email{ get; set; }
+        public string Email { get; set; }
     }
 }
