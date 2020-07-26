@@ -18,6 +18,7 @@ namespace Picassa.IDP
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetApplicationSettings(_configuration))
                 .AddApplicationServices()
+                .AddApiVersioning()
                 .AddSwagger()
                 .AddControllers();
                 
