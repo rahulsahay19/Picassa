@@ -1,6 +1,4 @@
-﻿using Picassa.IDP.Infrastructure.Extensions;
-
-namespace Picassa.IDP.Features.Pictures
+﻿namespace Picassa.IDP.Features.Pictures
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
@@ -9,6 +7,8 @@ namespace Picassa.IDP.Features.Pictures
     using System.Collections.Generic;
     using Models;
     using Controllers;
+    using Infrastructure.Extensions;
+    using static Infrastructure.WebConstants;
 
     [Authorize]
     public class PicturesController : ApiController
@@ -34,7 +34,7 @@ namespace Picassa.IDP.Features.Pictures
         /// <summary>
         /// Method to list pictures by UserId
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -47,21 +47,26 @@ namespace Picassa.IDP.Features.Pictures
         /// <summary>
         /// Method to return details of the picture
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
 
         [HttpGet]
-        [Route("{id}")]
+        [Route(Id)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<PictureDetailServiceModel>> FetchPictureDetails(int id)
             => await _pictureService.GetPictureDetailsById(id);
         //return picture.OrNotFound();
+        /// <summary>
+        /// Method to update picture
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult> Update(UpdatePictureRequestModel model)
         {
             var userId = User.GetId();
-            var updated = await _pictureService.Update(model.Id, model.Description, userId);
+            var updated = await _pictureService.UpdatePicture(model.Id, model.Description, userId);
             if (!updated)
             {
                 return BadRequest();
@@ -70,5 +75,23 @@ namespace Picassa.IDP.Features.Pictures
             return Ok();
         }
 
+        /// <summary>
+        /// Method to delete picture
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route(Id)]
+        public async Task<ActionResult> DeletePicture(int id)
+        {
+            var userId = User.GetId();
+            var deleted = await _pictureService.DeletePicture(id, userId);
+            if (!deleted)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     }
 }

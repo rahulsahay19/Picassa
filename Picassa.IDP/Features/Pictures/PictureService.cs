@@ -51,7 +51,7 @@
                     UserName = p.User.UserName
                 }).FirstOrDefaultAsync();
 
-        public async Task<bool> Update(int id, string description, string userId)
+        public async Task<bool> UpdatePicture(int id, string description, string userId)
         {
             var picture = await GetByIdAndByUserId(id, userId);
             if (picture == null)
@@ -60,6 +60,19 @@
             }
 
             picture.Description = description;
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeletePicture(int id, string userId)
+        {
+            var picture = await GetByIdAndByUserId(id, userId);
+            if (picture == null)
+            {
+                return false;
+            }
+
+            _dbContext.Pictures.Remove(picture);
             await _dbContext.SaveChangesAsync();
             return true;
         }
