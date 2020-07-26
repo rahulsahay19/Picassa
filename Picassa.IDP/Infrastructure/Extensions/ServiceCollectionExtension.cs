@@ -1,18 +1,19 @@
-﻿using Microsoft.OpenApi.Models;
-
-namespace Picassa.IDP.Infrastructure
+﻿namespace Picassa.IDP.Infrastructure.Extensions
 {
     using System.Text;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.IdentityModel.Tokens;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.IdentityModel.Tokens;
+    using Microsoft.OpenApi.Models;
     using Data;
     using Data.Models;
     using Features.Identity;
     using Features.Pictures;
+    using Filters;
+
     public static class ServiceCollectionExtension
     {
         public static ApplicationSettings GetApplicationSettings(this IServiceCollection services, IConfiguration configuration)
@@ -74,5 +75,9 @@ namespace Picassa.IDP.Infrastructure
                 {
                     c.SwaggerDoc("v1", new OpenApiInfo {Title = "Picassa API", Version = "v1"});
                 });
+
+        public static void AddAPIControllers(this IServiceCollection services)
+            => services
+                .AddControllers(options => options.Filters.Add<ModelOrNotFoundActionFilter>());
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Picassa.IDP.Features.Identity
+﻿namespace Picassa.IDP.Features.Identity.Models
 {
     public class LoginResponseModel
     {

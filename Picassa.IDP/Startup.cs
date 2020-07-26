@@ -5,7 +5,7 @@ namespace Picassa.IDP
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Infrastructure;
+    using Infrastructure.Extensions;
     public class Startup
     {
         private readonly IConfiguration _configuration;
@@ -20,7 +20,7 @@ namespace Picassa.IDP
                 .AddApplicationServices()
                 .AddApiVersioning()
                 .AddSwagger()
-                .AddControllers();
+                .AddAPIControllers();
                 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,8 +37,8 @@ namespace Picassa.IDP
                     .AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod())
-                    .UseAuthentication()
-                    .UseAuthorization()
+                .UseAuthentication()
+                .UseAuthorization()
                 .UseEndpoints(
                     endpoints =>
                     {

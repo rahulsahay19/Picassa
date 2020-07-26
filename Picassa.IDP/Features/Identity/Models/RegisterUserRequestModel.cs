@@ -1,7 +1,6 @@
-﻿namespace Picassa.IDP.Features.Identity
+﻿namespace Picassa.IDP.Features.Identity.Models
 {
     using System.ComponentModel.DataAnnotations;
-    
     public class RegisterUserRequestModel
     {
         [Required]

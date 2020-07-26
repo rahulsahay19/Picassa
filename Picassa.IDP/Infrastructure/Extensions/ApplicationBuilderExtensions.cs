@@ -1,4 +1,4 @@
-﻿namespace Picassa.IDP.Infrastructure
+﻿namespace Picassa.IDP.Infrastructure.Extensions
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.EntityFrameworkCore;

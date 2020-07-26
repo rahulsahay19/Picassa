@@ -1,4 +1,4 @@
-﻿namespace Picassa.IDP.Infrastructure
+﻿namespace Picassa.IDP.Infrastructure.Extensions
 {
     using System.Linq;
     using System.Security.Claims;

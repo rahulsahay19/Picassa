@@ -1,8 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Picassa.IDP.Infrastructure
+﻿namespace Picassa.IDP.Infrastructure.Extensions
 {
+    using Microsoft.Extensions.Configuration;
     public static class ConfigurationExtensions
     {
         public static string GetConnectionString(this IConfiguration configuration)
