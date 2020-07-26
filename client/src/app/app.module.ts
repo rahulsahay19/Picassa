@@ -8,13 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { PostPictureComponent } from './post-picture/post-picture.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { ListPicturesComponent } from './list-pictures/list-pictures.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    PostPictureComponent
+    PostPictureComponent,
+    ListPicturesComponent
   ],
   imports: [
     BrowserModule,

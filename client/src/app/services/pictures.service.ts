@@ -9,9 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class PicturesService {
   private picturePath = environment.apiUrl + 'pictures/'
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   postPicture(data): Observable<Picture> {
-    return this.httpClient.post<Picture>(this.picturePath, data);
+    return this.http.post<Picture>(this.picturePath, data);
+  }
+
+  getPictures(): Observable<Array<Picture>> {
+    return this.http.get<Array<Picture>>(this.picturePath);
   }
 }
