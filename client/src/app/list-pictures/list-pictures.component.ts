@@ -12,12 +12,22 @@ export class ListPicturesComponent implements OnInit {
   constructor(private picturesService: PicturesService) { }
 
   ngOnInit(): void {
+    this.getPictures();
+  }
+
+  getPictures() {
     this.picturesService.getPictures().subscribe(res => {
       this.pictures = res;
       console.log(this.pictures);
-    })
+    });
   }
 
-
+  deletePicture(picture) {
+    this.picturesService.deletePicture(picture.id).subscribe(res => {
+      const index = this.pictures.indexOf(picture);
+      this.pictures.splice(index, 1);
+      console.log('picture deleted!');
+    });
+  }
 
 }

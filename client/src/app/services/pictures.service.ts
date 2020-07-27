@@ -22,4 +22,8 @@ export class PicturesService {
   getPicture(id): Observable<Picture> {
     return this.http.get<Picture>(this.picturePath + id);
   }
+
+  deletePicture(id): Observable<Picture> {
+    return this.http.delete<Picture>(this.picturePath + id);
+  }
 }
