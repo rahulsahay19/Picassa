@@ -18,4 +18,8 @@ export class PicturesService {
   getPictures(): Observable<Array<Picture>> {
     return this.http.get<Array<Picture>>(this.picturePath);
   }
+
+  getPicture(id): Observable<Picture> {
+    return this.http.get<Picture>(this.picturePath + id);
+  }
 }
