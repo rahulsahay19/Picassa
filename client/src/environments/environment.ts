@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://picassaidp.azurewebsites.net/api/v1/'
-  //apiUrl: 'https://localhost:5001/api/v1/'
+  // apiUrl: 'https://localhost:5001/api/v1/'
 };
 
 /*

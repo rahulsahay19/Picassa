@@ -7,8 +7,9 @@
                     <h5 class="card-title">{{picture.id}}</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
-                    <a routerLink="/pictures/{{picture.id}}" class="btn btn-primary">See details</a>
-                    <button class="btn btn-danger" (click)="deletePicture(picture)">Delete</button>
+                    <a routerLink="/pictures/{{picture.id}}" class="btn btn-primary"> See details</a>
+                    <button class="btn btn-warning" (click)="updatePicture(picture.id)"> Update</button>
+                    <button class="btn btn-danger" (click)="deletePicture(picture)"> Delete</button>
                 </div>
             </div>
         </div>

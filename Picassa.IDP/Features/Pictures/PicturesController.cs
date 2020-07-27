@@ -63,6 +63,8 @@
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Update(UpdatePictureRequestModel model)
         {
             var userId = User.GetId();
@@ -82,6 +84,8 @@
         /// <returns></returns>
         [HttpDelete]
         [Route(Id)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> DeletePicture(int id)
         {
             var userId = User.GetId();

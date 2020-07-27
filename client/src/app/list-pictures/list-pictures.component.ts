@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PicturesService } from '../services/pictures.service';
 import { Picture } from '../models/picture';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-pictures',
@@ -9,7 +10,7 @@ import { Picture } from '../models/picture';
 })
 export class ListPicturesComponent implements OnInit {
   pictures: Array<Picture>;
-  constructor(private picturesService: PicturesService) { }
+  constructor(private picturesService: PicturesService, private router: Router) { }
 
   ngOnInit(): void {
     this.getPictures();
@@ -28,6 +29,10 @@ export class ListPicturesComponent implements OnInit {
       this.pictures.splice(index, 1);
       console.log('picture deleted!');
     });
+  }
+
+  updatePicture(id) {
+    this.router.navigate(['pictures', id, 'edit']);
   }
 
 }

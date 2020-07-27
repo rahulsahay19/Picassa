@@ -10,6 +10,7 @@ import { PostPictureComponent } from './post-picture/post-picture.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ListPicturesComponent } from './list-pictures/list-pictures.component';
 import { PictureDetailsComponent } from './picture-details/picture-details.component';
+import { EditPictureComponent } from './edit-picture/edit-picture.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PictureDetailsComponent } from './picture-details/picture-details.compo
     RegisterComponent,
     PostPictureComponent,
     ListPicturesComponent,
-    PictureDetailsComponent
+    PictureDetailsComponent,
+    EditPictureComponent
   ],
   imports: [
     BrowserModule,

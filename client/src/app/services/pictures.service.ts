@@ -26,4 +26,8 @@ export class PicturesService {
   deletePicture(id): Observable<Picture> {
     return this.http.delete<Picture>(this.picturePath + id);
   }
+
+  editPicture(picture): Observable<Picture> {
+    return this.http.put<Picture>(this.picturePath, picture);
+  }
 }

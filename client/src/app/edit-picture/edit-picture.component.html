@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <form [formGroup]="pictureForm">
+                <img [src]="picture.imageUrl" alt="">
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+                </div>
+                <button class="btn btn-primary" (click)="editPicture()"> Save</button>
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>

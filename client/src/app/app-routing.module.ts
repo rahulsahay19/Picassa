@@ -6,6 +6,7 @@ import { PostPictureComponent } from './post-picture/post-picture.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ListPicturesComponent } from './list-pictures/list-pictures.component';
 import { PictureDetailsComponent } from './picture-details/picture-details.component';
+import { EditPictureComponent } from './edit-picture/edit-picture.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'post', component: PostPictureComponent, canActivate: [AuthGuardService] },
   { path: 'pictures', component: ListPicturesComponent, canActivate: [AuthGuardService] },
   { path: 'pictures/:id', component: PictureDetailsComponent, canActivate: [AuthGuardService] },
+  { path: 'pictures/:id/edit', component: EditPictureComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({
