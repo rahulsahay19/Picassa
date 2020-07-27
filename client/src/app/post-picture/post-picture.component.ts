@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PicturesService } from '../services/pictures.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-picture',
@@ -9,7 +10,7 @@ import { PicturesService } from '../services/pictures.service';
 })
 export class PostPictureComponent {
   pictureForm: FormGroup;
-  constructor(private fb: FormBuilder, private pictureService: PicturesService) {
+  constructor(private fb: FormBuilder, private pictureService: PicturesService, private router: Router) {
     this.pictureForm = this.fb.group({
       'imageUrl': ['', Validators.required],
       'description': ['']
@@ -25,7 +26,7 @@ export class PostPictureComponent {
 
   post() {
     return this.pictureService.postPicture(this.pictureForm.value).subscribe(res => {
-      console.log(res);
+      this.router.navigate(['/pictures']);
     });
   }
 }
