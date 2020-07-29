@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'pictures', component: ListPicturesComponent, canActivate: [AuthGuardService] },
   { path: 'pictures/:id', component: PictureDetailsComponent, canActivate: [AuthGuardService] },
   { path: 'pictures/:id/edit', component: EditPictureComponent, canActivate: [AuthGuardService] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
