@@ -43,6 +43,7 @@
 
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, ApplicationSettings appSettings)
         {
+            //TODO change the secret key
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
                 {
